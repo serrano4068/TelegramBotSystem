@@ -1,0 +1,5 @@
+flask>=3.0.0,<4.0.0
+requests>=2.31.0,<3.0.0
+stripe>=11.0.0,<12.0.0
+python-telegram-bot>=21.0.0,<22.0.0
+# sqlite3 viene incluido con Python estandar; no se instala por pip.
