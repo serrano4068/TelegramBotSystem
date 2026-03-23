@@ -31,7 +31,7 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
-ADMIN_ID = _env_int("1876945257", 0)
+ADMIN_ID = 1876945257
 
 users: dict[str, dict[str, Any]] = {}
 pending_email_users: set[str] = set()
@@ -415,9 +415,14 @@ def handle_email_registration(chat_id: str | int, telegram_id: str | int, text: 
 
 
 def handle_addvip_command(chat_id: str | int, sender_id: str | int, arguments: str) -> None:
-    if not is_admin(sender_id):
-        send_message(chat_id, "No autorizado.")
+    if _safe_int(chat_id, 0) != ADMIN_ID:
+        send_message(chat_id, "No autorizado")
         return
+
+    send_message(chat_id, "Acceso VIP activado manualmente")
+
+    invite_link = "https://t.me/+TU_LINK_DEL_CANAL"
+    send_message(chat_id, f"Aqui tienes acceso VIP:\n{invite_link}")
 
     telegram_id, email = parse_admin_target(arguments)
     if not email and telegram_id:
@@ -435,9 +440,11 @@ def handle_addvip_command(chat_id: str | int, sender_id: str | int, arguments: s
 
 
 def handle_removevip_command(chat_id: str | int, sender_id: str | int, arguments: str) -> None:
-    if not is_admin(sender_id):
-        send_message(chat_id, "No autorizado.")
+    if _safe_int(chat_id, 0) != ADMIN_ID:
+        send_message(chat_id, "No autorizado")
         return
+
+    send_message(chat_id, "Acceso VIP removido")
 
     telegram_id, email = parse_admin_target(arguments)
     if not email and telegram_id:
