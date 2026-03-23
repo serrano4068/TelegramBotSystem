@@ -31,7 +31,7 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
-ADMIN_ID = _env_int("ADMIN_ID", 0)
+ADMIN_ID = _env_int("1876945257", 0)
 
 users: dict[str, dict[str, Any]] = {}
 pending_email_users: set[str] = set()
